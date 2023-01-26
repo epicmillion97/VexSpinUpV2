@@ -43,45 +43,6 @@ float cap(float inputVal, float maxMinVal) { // Cap allow full use of motor rang
   // else return inputVal
 }
 
-void autonomous_mode(){
-  Controller1.Screen.setCursor(2, 1);
-  Controller1.Screen.print("A-Act - 1");
-
-  driveForward(tile*4, translationSpeed);
-  Controller1.Screen.print("A-Act - 2");
-
-  wait(1,sec);
-  driveTurn(90, turningSpeed);
-  Controller1.Screen.print("A-Act - 3");
-  //wait(3,sec);
-
-  /*
-  
-  startIntake();
-  wait(.5, sec);
-
-  driveForward(2*tile, translationSpeed);
-
-  wait(.5,sec); //delay
-  driveTurn(-90);
-  wait(2, sec);
-  startFlywheel(80);
-  wait(2,sec);
-  stopIntake();
-  wait(.5,sec); //delay
-  startConveyorToFlywheelIntermittent();
-  wait(4, sec);
-  stopConveyorToFlywheel();
-  stopFlywheel();
-  wait(.5,sec); //delay
-  driveTurn(45);
-  driveForward(2*tile, translationSpeed);
-  wait(.5,sec); //delay
-  driveTurn(45);
-  driveForward(tile, 50);
-  */
-}
-
 
 void turbocode(){ // BETA TURBO CODE CALLBACK FUNCTION
   if(turboModeActive == false){
@@ -218,7 +179,7 @@ int main() {
   vexcodeInit();
   setup();
   
-  Competition.autonomous(autonomous_mode);
+  Competition.autonomous(autonomousTest);
   Competition.drivercontrol(driverControl);
 
   while(420==420) {

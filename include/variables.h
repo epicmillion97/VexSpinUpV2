@@ -29,8 +29,6 @@ bool visionDrivingActive = false; // BETA IMAGE DETECTION Status
 bool autonoumousActive = false; // autonmous active status
 
 // AUTONOMOUS VARIABLES
-float tile = 24;
-float translationSpeed = 100;
-float turningSpeed = 50;
+
 
 #endif

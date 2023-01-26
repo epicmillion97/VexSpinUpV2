@@ -12,4 +12,9 @@ void startConveyorToFlywheel();
 void startConveyorToFlywheelIntermittent();
 void stopConveyorToFlywheel();
 
+void autonomousTest();
+void autonomousOne();
+void autonomousTwo();
+void autonomousThree();
+
 #endif

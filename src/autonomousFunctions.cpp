@@ -9,6 +9,9 @@ float wheelDiameter = 3.5;
 float wheelCircumference = wheelDiameter * 3.141; //inches
 float turningDiameter = 22;
 
+float tile = 24;
+float translationSpeed = 100;
+float turningSpeed = 75;
 
 
 void driveForward(float inches, float speed) {
@@ -56,6 +59,7 @@ void startFlywheel(int powera){
   Flywheel.setVelocity(powera, percent);
   Flywheel.spin(forward);
 }
+
 void stopFlywheel(){
   Flywheel.setVelocity(0, percent);
 }
@@ -76,4 +80,49 @@ void startConveyorToFlywheelIntermittent(){
 
 void stopConveyorToFlywheel(){
   Conveyor2.setVelocity(0, percent);
+}
+
+
+void autonomousTest(){
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - 1");
+
+  driveForward(tile*4, translationSpeed);
+  Controller1.Screen.print("A-Act - 2");
+
+  wait(1,sec);
+  driveTurn(90, turningSpeed);
+  Controller1.Screen.print("A-Act - 3");
+}
+
+
+void autonomousOne(){
+  // random shit
+  wait(3,sec);
+  startIntake();
+  wait(.5, sec);
+
+  driveForward(2*tile, translationSpeed);
+
+  wait(.5,sec); //delay
+  driveTurn(-90, turningSpeed);
+  wait(2, sec);
+  startFlywheel(80);
+  wait(2,sec);
+  stopIntake();
+  wait(.5,sec); //delay
+  startConveyorToFlywheelIntermittent();
+  wait(4, sec);
+  stopConveyorToFlywheel();
+  stopFlywheel();
+  wait(.5,sec); //delay
+  driveTurn(45, turningSpeed);
+  driveForward(2*tile, translationSpeed);
+  wait(.5,sec); //delay
+  driveTurn(45, turningSpeed);
+  driveForward(tile, 50); 
+}
+
+void autonomousTwo(){
+  
 }
