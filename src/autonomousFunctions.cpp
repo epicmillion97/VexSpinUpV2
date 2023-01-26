@@ -10,28 +10,28 @@ float wheelCircumference = wheelDiameter * 3.141; //inches
 float turningDiameter = 22;
 
 float tile = 24;
-float translationSpeed = 100;
-float turningSpeed = 75;
+float translationSpeed = 75;
+float turningSpeed = 50;
 
 
 void driveForward(float inches, float speed) {
     float inchesPerDegree = wheelCircumference / 360;
     float degrees = inches / inchesPerDegree;
 
-    FrontRight.startRotateFor(degrees, deg, speed, rpm);
-    FrontLeft.startRotateFor(degrees, deg, speed, rpm);
-    BackRight.startRotateFor(degrees, deg, speed, rpm);
-    BackLeft.rotateFor(degrees, deg, speed, rpm);
+    FrontRight.startRotateFor(degrees, deg, speed, vex::velocityUnits::pct);
+    FrontLeft.startRotateFor(degrees, deg, speed, vex::velocityUnits::pct);
+    BackRight.startRotateFor(degrees, deg, speed, vex::velocityUnits::pct);
+    BackLeft.rotateFor(degrees, deg, speed, vex::velocityUnits::pct);
 }
 
 void driveBackward(float inches, float speed) {
     float inchesPerDegree = wheelCircumference / 360;
     float degrees = inches / inchesPerDegree;
 
-    FrontRight.startRotateFor(-degrees, deg, speed, rpm);
-    FrontLeft.startRotateFor(-degrees, deg, speed, rpm);
-    BackRight.startRotateFor(-degrees, deg, speed, rpm);
-    BackLeft.rotateFor(-degrees, deg, speed, rpm);
+    FrontRight.startRotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
+    FrontLeft.startRotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
+    BackRight.startRotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
+    BackLeft.rotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
 }
 
 void driveTurn(float degrees, float turningSpeed){
@@ -44,13 +44,13 @@ void driveTurn(float degrees, float turningSpeed){
 }
 
 void driveStrafe(float inches){
-    float speed = 100;
+    float speed = 50;
     float inchesPerDegree = wheelCircumference / 360;
     float degrees = (inches / inchesPerDegree)/2;
-    FrontRight.startRotateFor(degrees, deg, speed, rpm);
-    FrontLeft.startRotateFor(-degrees, deg, speed, rpm);
-    BackRight.startRotateFor(-degrees, deg, speed, rpm);
-    BackLeft.rotateFor(degrees, deg, speed, rpm);
+    FrontRight.startRotateFor(degrees, deg, speed, vex::velocityUnits::pct);
+    FrontLeft.startRotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
+    BackRight.startRotateFor(-degrees, deg, speed, vex::velocityUnits::pct);
+    BackLeft.rotateFor(degrees, deg, speed, vex::velocityUnits::pct);
 }
 
 void startIntake(){
