@@ -30,6 +30,7 @@ using namespace vex;
 
 competition Competition;
 
+
 float cap(float inputVal, float maxMinVal) { // Cap allow full use of motor range with steering
   if (inputVal > maxMinVal){
     return maxMinVal;
@@ -178,9 +179,10 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   setup();
-  
+  Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
   Competition.autonomous(autonomousTest);
   Competition.drivercontrol(driverControl);
+  
 
   while(420==420) {
     vexDelay(69);  //delay to limit resources
