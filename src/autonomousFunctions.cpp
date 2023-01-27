@@ -37,10 +37,10 @@ void driveBackward(float inches, float speed) {
 void driveTurn(float degrees, float turningSpeed){
   float turningRatio = turningDiameter / wheelDiameter;
   float wheelDegrees = turningRatio * degrees;
-    FrontRight.startRotateFor(-wheelDegrees, deg, turningSpeed, rpm);
-    FrontLeft.startRotateFor(wheelDegrees, deg, turningSpeed, rpm);
-    BackRight.startRotateFor(-wheelDegrees, deg, turningSpeed, rpm);
-    BackLeft.rotateFor(wheelDegrees, deg, turningSpeed, rpm);
+    FrontRight.startRotateFor(-wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+    FrontLeft.startRotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+    BackRight.startRotateFor(-wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+    BackLeft.rotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
 }
 
 void driveStrafe(float inches){
@@ -139,7 +139,7 @@ void autonomousOne(){
 void autonomousTwo(){
   Controller1.Screen.setCursor(2, 1);
   Controller1.Screen.print("A-Act - 2");
-  // if placed on the roller and facing it
+  // if placed on the roller and facing it bottom corner
   wait(1, sec);
 
   // get roller
