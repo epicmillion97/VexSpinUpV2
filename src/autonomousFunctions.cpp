@@ -96,6 +96,11 @@ void stopEveryting(){
   
 }
 
+void autonomousinit(){
+  
+}
+
+
 void autonomousTest(){
   Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(2, 1);

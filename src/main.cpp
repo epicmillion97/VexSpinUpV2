@@ -76,6 +76,8 @@ void turbocode(){ // BETA TURBO CODE CALLBACK FUNCTION
 
 void driverControl(){
   Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("DriveR");
   while (69==69){
   //THE MOVE PLACE
   float V = Controller1.Axis3.position(percent); // Forward and backwards
