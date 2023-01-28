@@ -4,8 +4,8 @@ extern brain Brain;
 
 // VEXcode devices
 extern motor FrontLeft;
-extern motor BackLeft;
 extern motor FrontRight;
+extern motor BackLeft;
 extern motor BackRight;
 extern motor Flywheel;
 extern motor ColorRoller;

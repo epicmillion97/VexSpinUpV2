@@ -9,8 +9,8 @@ brain  Brain;
 
 // VEXcode device constructors
 motor FrontLeft = motor(PORT1, ratio18_1, false);
-motor BackLeft = motor(PORT2, ratio18_1, false);
-motor FrontRight = motor(PORT3, ratio18_1, true);
+motor FrontRight = motor(PORT2, ratio18_1, true);
+motor BackLeft = motor(PORT3, ratio18_1, false);
 motor BackRight = motor(PORT4, ratio18_1, true);
 motor Flywheel = motor(PORT5, ratio18_1, true);
 motor ColorRoller = motor(PORT6, ratio18_1, true);

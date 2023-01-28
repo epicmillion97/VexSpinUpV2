@@ -11,8 +11,8 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // FrontLeft            motor         1               
-// BackLeft             motor         2               
-// FrontRight           motor         3               
+// FrontRight           motor         2               
+// BackLeft             motor         3               
 // BackRight            motor         4               
 // Flywheel             motor         5               
 // ColorRoller          motor         6               
@@ -57,7 +57,7 @@ void turbocode(){ // BETA TURBO CODE CALLBACK FUNCTION
     Controller1.Screen.clearLine(3);  
     Controller1.Screen.setCursor(3, 1); 
     Controller1.Screen.print("TURBO MODE ACTIVE");
-
+    wait(100, msec);
   } else if(turboModeActive == true){
     currentMaxRotationSpeed = MaxRotationSpeed; // Sets current max rotation speed back to default
     currentMaxTranslationSpeed = MaxTranslationSpeed; // Sets current translation speed back to default
@@ -69,11 +69,13 @@ void turbocode(){ // BETA TURBO CODE CALLBACK FUNCTION
     Controller1.Screen.clearLine(3);
     Controller1.Screen.setCursor(3, 1);
     Controller1.Screen.print(" ");
+    wait(100, msec);
   }
 }
 
 
 void driverControl(){
+  Controller1.Screen.clearScreen();
   while (69==69){
   //THE MOVE PLACE
   float V = Controller1.Axis3.position(percent); // Forward and backwards
@@ -144,7 +146,7 @@ void driverControl(){
       Controller1.Screen.setCursor(2, 1);
       Controller1.Screen.print(flywheelStrength);
     }
-    wait(500,msec);
+    wait(400,msec);
   } else if(Controller1.ButtonRight.pressing() == true){ //Increases flywheel strength
     if(flywheelStrength < 100){
       flywheelStrength+=10;
@@ -152,7 +154,7 @@ void driverControl(){
       Controller1.Screen.setCursor(2, 1);
       Controller1.Screen.print(flywheelStrength);
     }
-    wait(500,msec);
+    wait(400,msec);
   }
   Controller1.ButtonR1.pressed(turbocode); // Activate Turbo Mode
 
@@ -180,7 +182,7 @@ int main() {
   vexcodeInit();
   setup();
   Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
-  Competition.autonomous(autonomousTest);
+  Competition.autonomous(autonomousOne);
   Competition.drivercontrol(driverControl);
   
 
