@@ -24,6 +24,29 @@ void driveForward(float inches, float speed) {
     BackLeft.rotateFor(degrees, deg, speed, vex::velocityUnits::pct);
 }
 
+void drivegay() {
+    FrontRight.setVelocity(50, percent);
+    FrontRight.spin(forward);
+    FrontLeft.setVelocity(50, percent);
+    FrontLeft.spin(forward);
+    BackRight.setVelocity(50, percent);
+    BackRight.spin(forward);
+    BackLeft.setVelocity(50, percent);
+    BackLeft.spin(forward);
+}
+
+void drivegaystop(){
+    FrontRight.setVelocity(0, percent);
+    FrontRight.spin(forward);
+    FrontLeft.setVelocity(0, percent);
+    FrontLeft.spin(forward);
+    BackRight.setVelocity(0, percent);
+    BackRight.spin(forward);
+    BackLeft.setVelocity(0, percent);
+    BackLeft.spin(forward);
+
+}
+
 void driveBackward(float inches, float speed) {
     float inchesPerDegree = wheelCircumference / 360;
     float degrees = inches / inchesPerDegree;
@@ -63,6 +86,15 @@ void startIntake(){
 void stopIntake(){
   ColorRoller.setVelocity(0, percent);
   Conveyor1.setVelocity(0, percent);
+}
+
+void startColor(){
+  ColorRoller.setVelocity(-45,percent); // Set Velocity of Intake
+  ColorRoller.spin(forward); // Start Motor
+}
+
+void stopColor(){
+  ColorRoller.setVelocity(0, percent);
 }
 
 void startFlywheel(int powera){
@@ -120,7 +152,6 @@ void autonomousOne(){
   Controller1.Screen.setCursor(2, 1);
   Controller1.Screen.print("A-Act - 1");
   // random shit - intake. then drive 2 tiles + turn and shoot + come back 2 tiles.
-  wait(1,sec);
   startIntake();
   wait(6, sec);
   
@@ -159,19 +190,24 @@ void autonomousTwo(){
 
   // get roller
   startIntake();
-  driveForward(5, 120);
+  drivegay();
+  wait(.5,sec);
+  drivegaystop();
+
   
   driveBackward(.5*tile, translationSpeed);
   // face diagonal facing the three disc pile
-  driveTurn(-135, turningSpeed);
+  driveTurn(-136, turningSpeed);
   driveStrafe(-2); // NOT SURE IF WORKS BUT WOULD MOVE LEFT OF DISC PILE
 
   // move towards center
   startFlywheel(80);
-  stopIntake();
   driveForward(2*tile, translationSpeed);
+  stopIntake();
+  //spin around
+  driveTurn(-180, turningSpeed);
   // shooting discs
- startConveyorToFlywheel();
+  startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
   wait(.5, sec);
@@ -190,26 +226,29 @@ void autonomousThree(){
   // if placed on the two tiles near the roller facing out to the field
   
   // get to roller
-  driveForward(3, translationSpeed); // forward 3 inches to get off wall
+  driveForward(4.5, translationSpeed); // forward 3 inches to get off wall
   driveTurn(90, turningSpeed);
-  driveForward(tile*1.2, translationSpeed);
+  driveForward(20, translationSpeed);
   driveTurn(90, turningSpeed);
   // run into roller
-  startIntake();
-  wait(1, sec);
-  driveForward(tile, translationSpeed);
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(.75,sec);
+  drivegaystop();
   // get away from roller
   driveBackward(6, translationSpeed);
-  stopIntake();
-  driveTurn(135, turningSpeed);
+  stopColor();
+  startFlywheel(85);
+  driveTurn(140, turningSpeed);
   // move into the center for a shot
-  startIntake();
-  driveForward(2*tile, translationSpeed);
-  stopIntake();
-  startFlywheel(70);
-  driveTurn(-180, turningSpeed);
+  //startIntake();
+  driveForward(2.5*tile, translationSpeed);
+  //stopIntake();
+
   // shooting discs
- startConveyorToFlywheel();
+  driveTurn(176, turningSpeed);
+  startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
   wait(.5, sec);
@@ -222,4 +261,9 @@ void autonomousThree(){
   stopConveyorToFlywheel();
   // stop flywheel
   stopFlywheel();
+
+}
+
+void autonomousSkills(){
+
 }

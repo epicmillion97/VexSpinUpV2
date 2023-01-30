@@ -16,5 +16,5 @@ void autonomousTest();
 void autonomousOne();
 void autonomousTwo();
 void autonomousThree();
-
+void autonomousSkills();
 #endif

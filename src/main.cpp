@@ -184,7 +184,7 @@ int main() {
   vexcodeInit();
   setup();
   Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
-  Competition.autonomous(autonomousOne);
+  Competition.autonomous(autonomousThree);
   Competition.drivercontrol(driverControl);
   
 
@@ -194,3 +194,7 @@ int main() {
 }
 
 // created by yaseen and hayden. the best
+
+// number 5 - autonomousOne
+// number 1 - autonomousTwo
+// number 2 - autonomousThree
