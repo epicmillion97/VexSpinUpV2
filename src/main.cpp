@@ -23,7 +23,7 @@
 
 #include "vex.h"
 #include "variables.h"
-#include "autonomousFunctions.h"
+#include "newAutonomous.h"
 
 
 using namespace vex;
@@ -184,7 +184,7 @@ int main() {
   vexcodeInit();
   setup();
   Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
-  Competition.autonomous(autonomousThree);
+  Competition.autonomous(newAutonomous);
   Competition.drivercontrol(driverControl);
   
 
