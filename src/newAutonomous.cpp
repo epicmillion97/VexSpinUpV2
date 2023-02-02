@@ -3,27 +3,19 @@
 
 using namespace vex;
 
-// AUTONOMOUS VARIABLES
-float wheelDiameter = 3.5;
-float wheelCircumference = wheelDiameter * 3.141; //inches
-float turningDiameter = 22;
-
-float tile = 24;
-float translationSpeed = 75;
-float turningSpeed = 50;
 
 
 
-double kP = 0.0;
-double kI = 0.0;
-double kD = 0.0;
+double kP = 0.013;
+double kI = 0.000;
+double kD = 0.003;
 
-double turnkP = 0.0;
+double turnkP = 0.0000001;
 double turnkI = 0.0;
 double turnkD = 0.0;
 
 
-int desiredValue = 200;
+int desiredValue = 0;
 int desiredTurnValue =0;
 
 int error; //sensorvalue - desiredvalue: position
@@ -42,6 +34,10 @@ bool resetDriveSensors = false;
 bool enablePIDdrive = true;
 
 int drivePID(){
+  FrontLeft.setBrake(brake);
+  FrontRight.setBrake(brake);
+  BackLeft.setBrake(brake);
+  BackRight.setBrake(brake);
   while(enablePIDdrive){
     if(resetDriveSensors){
       resetDriveSensors = false;
@@ -51,27 +47,36 @@ int drivePID(){
 
 
     // lateral movement PID
-    int leftMotorPosition = FrontLeft.position(degrees);
-    int rightMotorPosition = FrontRight.position(degrees);
+    int frontLeftMotorPosition = FrontLeft.position(degrees);
+    int frontRightMotorPosition = FrontRight.position(degrees);
+    int backLeftMotorPosition = FrontLeft.position(degrees);
+    int backRightMotorPosition = FrontRight.position(degrees);
 
-    int averagePosition = (leftMotorPosition+rightMotorPosition)/2;
 
-    error = averagePosition - desiredValue;
+    int averagePosition = ((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
+
+    error = desiredValue - averagePosition;
     deriative = error - prevError;
     totalError += error;
 
     double lateralMotorPower = (error * kP + deriative * kD + totalError * kI);
 
     // turning movement PID
-    int turnDifference = leftMotorPosition - rightMotorPosition;
+    //int turnDifference = Inertial.rotation(deg);
 
-    turnError = turnDifference - desiredTurnValue;
+    turnError = desiredTurnValue - Inertial.rotation(deg);
     turnDeriative = turnError - turnPrevError;
     turnTotalError += turnError;
     double turnMotorPower = turnError * turnkP + turnDeriative + turnkD + turnTotalError + turnkI;
 
 
+    Controller1.Screen.clearLine(2);
+    Controller1.Screen.setCursor(2,1);
+    Controller1.Screen.print(averagePosition);
 
+    Controller1.Screen.clearLine(3);
+    Controller1.Screen.setCursor(3,1);
+    Controller1.Screen.print(Inertial.rotation(deg));
     FrontLeft.spin(forward, lateralMotorPower + turnMotorPower, voltageUnits::volt);
     FrontRight.spin(forward, lateralMotorPower - turnMotorPower, voltageUnits::volt);
     BackLeft.spin(forward, lateralMotorPower + turnMotorPower, voltageUnits::volt);
@@ -87,8 +92,21 @@ int drivePID(){
 
 void newAutonomous(){
   task bill(drivePID);
+  resetDriveSensors = true;
+  
+  desiredValue = 48/((4*3.141)/360); // 687.67 = tile
+  desiredTurnValue = 0;
+  wait(2000, msec);
+  resetDriveSensors = true;
+  desiredValue = -24/((4*3.141)/360);
+  wait(2000, msec);
 
-  desiredValue = 300;
-  desiredTurnValue = 600;
-
+  resetDriveSensors = true;
+  //desiredTurnValue = 90;
+  desiredValue = 24/((4*3.141)/360); // 687.67 = tile
+  desiredTurnValue = 0;
+  wait(2000, msec);
+  resetDriveSensors = true;
+  desiredValue = -48/((4*3.141)/360);
+  wait(2000, msec);
 }

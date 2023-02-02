@@ -64,6 +64,26 @@ void driveTurn(float degrees, float turningSpeed){
     FrontLeft.startRotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
     BackRight.startRotateFor(-wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
     BackLeft.rotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+    
+}
+
+void driveTurn2(float degrees, float turningSpeed){
+  Inertial.setRotation(0, deg);
+  float turningRatio = turningDiameter / wheelDiameter;
+  float wheelDegrees = turningRatio * degrees;
+  FrontRight.startRotateFor(-wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+  FrontLeft.startRotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+  BackRight.startRotateFor(-wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+  BackLeft.startRotateFor(wheelDegrees, deg, turningSpeed, vex::velocityUnits::pct);
+  while(Inertial.rotation(deg) < degrees){
+    wait(10, msec);
+    Controller1.Screen.setCursor(2,1);
+    Controller1.Screen.print(Inertial.rotation(deg));
+  }
+    FrontRight.stop();
+    FrontLeft.stop();
+    BackRight.stop();
+    BackLeft.stop();
 }
 
 void driveStrafe(float inches){
@@ -231,16 +251,20 @@ void autonomousThree(){
   driveForward(20, translationSpeed);
   driveTurn(90, turningSpeed);
   // run into roller
+  /*
   startColor();
   wait(.5, sec);
   drivegay();
   wait(.75,sec);
   drivegaystop();
   // get away from roller
-  driveBackward(6, translationSpeed);
+  */
   stopColor();
-  startFlywheel(85);
-  driveTurn(140, turningSpeed);
+  driveBackward(6, translationSpeed);
+  
+
+  startFlywheel(82);
+  driveTurn(155, turningSpeed);
   // move into the center for a shot
   //startIntake();
   driveForward(2.5*tile, translationSpeed);
@@ -251,11 +275,11 @@ void autonomousThree(){
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
-  wait(.5, sec);
+  wait(.7, sec);
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
-  wait(.5, sec);
+  wait(.7, sec);
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
@@ -265,5 +289,7 @@ void autonomousThree(){
 }
 
 void autonomousSkills(){
-
+  driveForward(tile, translationSpeed);
+  driveTurn2(90, turningSpeed);
+  driveForward(tile, translationSpeed);
 }

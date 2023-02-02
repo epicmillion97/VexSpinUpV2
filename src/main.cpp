@@ -19,10 +19,12 @@
 // Conveyor1            motor         7               
 // Conveyor2            motor         8               
 // Controller1          controller                    
+// Inertial             inertial      10              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 #include "variables.h"
+//#include "autonomousFunctions.h"
 #include "newAutonomous.h"
 
 
@@ -105,6 +107,13 @@ void driverControl(){
   FrontRight.spin(forward);
   BackLeft.spin(forward);
   BackRight.spin(forward);
+
+  int frontLeftMotorPosition = FrontLeft.position(degrees);
+  int frontRightMotorPosition = FrontRight.position(degrees);
+  int backLeftMotorPosition = FrontLeft.position(degrees);
+  int backRightMotorPosition = FrontRight.position(degrees);
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
 
 
   if(Controller1.ButtonY.pressing() == true) { //This is for Conveyor1 and Intake
