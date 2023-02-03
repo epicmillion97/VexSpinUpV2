@@ -114,7 +114,8 @@ void driverControl(){
   int backRightMotorPosition = FrontRight.position(degrees);
   Controller1.Screen.setCursor(2, 1);
   Controller1.Screen.print((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
-
+  Controller1.Screen.setCursor(3, 1);
+  Controller1.Screen.print(Inertial.rotation(deg));
 
   if(Controller1.ButtonY.pressing() == true) { //This is for Conveyor1 and Intake
     ColorRoller.setVelocity(currentcolorRollerSpeed,percent); // Set Velocity of Intake

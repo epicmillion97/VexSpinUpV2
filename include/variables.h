@@ -13,7 +13,7 @@ float currentMaxTranslationSpeed = MaxTranslationSpeed;
 
 int conveyor1Speed = 45; //Normal Vertical Conveyor Speed 
 int conveyor1SpeedTurbo = 85; //Turbo Vertical Conveyor Speed 
-int colorRollerSpeed = 40; // Normal Intake/ColorRoller Speed
+int colorRollerSpeed = 30; // Normal Intake/ColorRoller Speed
 int colorRollerSpeedTurbo = 80; // Turbo Intake/ColorRoller Speed
 int currentConveyor1Speed = conveyor1Speed;
 int currentcolorRollerSpeed = colorRollerSpeed;

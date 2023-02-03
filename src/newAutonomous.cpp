@@ -10,9 +10,9 @@ double kP = 0.013;
 double kI = 0.001;
 double kD = 0.003;
 
-double turnkP = 0.001;
-double turnkI = 0.0;
-double turnkD = 0.001;
+double turnkP = 0.11;
+double turnkI = 0.00;
+double turnkD = 0.01;
 
 
 int desiredValue = 0;
@@ -34,10 +34,10 @@ bool resetDriveSensors = false;
 bool enablePIDdrive = true;
 
 int drivePID(){
-  FrontLeft.setBrake(brake);
-  FrontRight.setBrake(brake);
-  BackLeft.setBrake(brake);
-  BackRight.setBrake(brake);
+  //FrontLeft.setBrake(brake);
+  //FrontRight.setBrake(brake);
+  //BackLeft.setBrake(brake);
+  //BackRight.setBrake(brake);
   while(enablePIDdrive){
     if(resetDriveSensors){
       resetDriveSensors = false;
@@ -45,6 +45,7 @@ int drivePID(){
       FrontRight.setPosition(0, degrees);
       BackLeft.setPosition(0, degrees);
       BackRight.setPosition(0, degrees);
+      Inertial.resetRotation();
     }
 
 
@@ -66,10 +67,10 @@ int drivePID(){
     // turning movement PID
     //int turnDifference = Inertial.rotation(deg);
 
-    turnError = (desiredTurnValue - Inertial.rotation(deg))*0.1;
+    turnError = desiredTurnValue - Inertial.rotation(deg);
     turnDeriative = turnError - turnPrevError;
     turnTotalError += turnError;
-    double turnMotorPower = turnError * turnkP + turnDeriative + turnkD + turnTotalError + turnkI;
+    double turnMotorPower = turnError * turnkP + turnDeriative * turnkD + turnTotalError * turnkI;
 
 
     Controller1.Screen.clearLine(2);
@@ -99,25 +100,24 @@ float frominches(float inches){
 
 void newAutonomous(){
   task bill(drivePID);
+
   resetDriveSensors = true;
-  
   desiredValue = frominches(24);
   desiredTurnValue = 0;
   wait(2000, msec);
-  resetDriveSensors = true;
 
+  resetDriveSensors = true;
   desiredValue = frominches(24);
   wait(2000, msec);
-  resetDriveSensors = true;
-
-  desiredValue = frominches(-24);
-  wait(3000, msec);
 
   resetDriveSensors = true;
+  desiredValue = 0;
   desiredTurnValue = 90;
-  wait(3000, msec);
+  wait(2000, msec);
 
   resetDriveSensors = true;
-  desiredValue = frominches(-24);
+  desiredTurnValue = 0;
+  desiredValue = frominches(-48);
   wait(3000, msec);
+  
 }
