@@ -4,8 +4,6 @@
 using namespace vex;
 
 
-
-
 double kP = 0.013;
 double kI = 0.001;
 double kD = 0.003;
@@ -34,6 +32,7 @@ bool resetDriveSensors = false;
 bool enablePIDdrive = true;
 
 int drivePID(){
+  float startTime;
   //FrontLeft.setBrake(brake);
   //FrontRight.setBrake(brake);
   //BackLeft.setBrake(brake);
@@ -46,15 +45,16 @@ int drivePID(){
       BackLeft.setPosition(0, degrees);
       BackRight.setPosition(0, degrees);
       Inertial.resetRotation();
+      startTime = Brain.Timer.time(sec);
     }
 
-
+    /////////////////////////////
     // lateral movement PID
+    /////////////////////////////
     int frontLeftMotorPosition = FrontLeft.position(degrees);
     int frontRightMotorPosition = FrontRight.position(degrees);
     int backLeftMotorPosition = FrontLeft.position(degrees);
     int backRightMotorPosition = FrontRight.position(degrees);
-
 
     int averagePosition = ((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
 
@@ -64,27 +64,27 @@ int drivePID(){
 
     double lateralMotorPower = (error * kP + deriative * kD + totalError * kI);
 
+    ////////////////////////////
     // turning movement PID
-    //int turnDifference = Inertial.rotation(deg);
-
+    /////////////////////////////
     turnError = desiredTurnValue - Inertial.rotation(deg);
     turnDeriative = turnError - turnPrevError;
     turnTotalError += turnError;
     double turnMotorPower = turnError * turnkP + turnDeriative * turnkD + turnTotalError * turnkI;
-
-
+    
     Controller1.Screen.clearLine(2);
     Controller1.Screen.setCursor(2,1);
-    Controller1.Screen.print(averagePosition);
+    float diffTime = Brain.Timer.time(sec) - startTime;
+    Controller1.Screen.print(diffTime);
 
     Controller1.Screen.clearLine(3);
     Controller1.Screen.setCursor(3,1);
     Controller1.Screen.print(Inertial.rotation(deg));
+
     FrontLeft.spin(forward, lateralMotorPower + turnMotorPower, voltageUnits::volt);
     FrontRight.spin(forward, lateralMotorPower - turnMotorPower, voltageUnits::volt);
     BackLeft.spin(forward, lateralMotorPower + turnMotorPower, voltageUnits::volt);
     BackRight.spin(forward, lateralMotorPower - turnMotorPower, voltageUnits::volt);
-
 
     prevError = error;
     task::sleep(20);
@@ -99,8 +99,9 @@ float frominches(float inches){
 
 
 void newAutonomous(){
+  
   task bill(drivePID);
-
+  
   resetDriveSensors = true;
   desiredValue = frominches(24);
   desiredTurnValue = 0;

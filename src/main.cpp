@@ -20,6 +20,7 @@
 // Conveyor2            motor         8               
 // Controller1          controller                    
 // Inertial             inertial      10              
+// Pneumatics           digital_out   A               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
