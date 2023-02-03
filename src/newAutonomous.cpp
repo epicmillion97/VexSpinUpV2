@@ -7,12 +7,12 @@ using namespace vex;
 
 
 double kP = 0.013;
-double kI = 0.000;
+double kI = 0.001;
 double kD = 0.003;
 
-double turnkP = 0.0000001;
+double turnkP = 0.001;
 double turnkI = 0.0;
-double turnkD = 0.0;
+double turnkD = 0.001;
 
 
 int desiredValue = 0;
@@ -43,6 +43,8 @@ int drivePID(){
       resetDriveSensors = false;
       FrontLeft.setPosition(0, degrees);
       FrontRight.setPosition(0, degrees);
+      BackLeft.setPosition(0, degrees);
+      BackRight.setPosition(0, degrees);
     }
 
 
@@ -64,7 +66,7 @@ int drivePID(){
     // turning movement PID
     //int turnDifference = Inertial.rotation(deg);
 
-    turnError = desiredTurnValue - Inertial.rotation(deg);
+    turnError = (desiredTurnValue - Inertial.rotation(deg))*0.1;
     turnDeriative = turnError - turnPrevError;
     turnTotalError += turnError;
     double turnMotorPower = turnError * turnkP + turnDeriative + turnkD + turnTotalError + turnkI;
@@ -89,24 +91,33 @@ int drivePID(){
   return 1;
 }
 
+float frominches(float inches){
+  return inches/((4*3.141)/360);  // 687.67 = tile
+}
+
+
 
 void newAutonomous(){
   task bill(drivePID);
   resetDriveSensors = true;
   
-  desiredValue = 48/((4*3.141)/360); // 687.67 = tile
+  desiredValue = frominches(24);
   desiredTurnValue = 0;
   wait(2000, msec);
   resetDriveSensors = true;
-  desiredValue = -24/((4*3.141)/360);
+
+  desiredValue = frominches(24);
   wait(2000, msec);
+  resetDriveSensors = true;
+
+  desiredValue = frominches(-24);
+  wait(3000, msec);
 
   resetDriveSensors = true;
-  //desiredTurnValue = 90;
-  desiredValue = 24/((4*3.141)/360); // 687.67 = tile
-  desiredTurnValue = 0;
-  wait(2000, msec);
+  desiredTurnValue = 90;
+  wait(3000, msec);
+
   resetDriveSensors = true;
-  desiredValue = -48/((4*3.141)/360);
-  wait(2000, msec);
+  desiredValue = frominches(-24);
+  wait(3000, msec);
 }

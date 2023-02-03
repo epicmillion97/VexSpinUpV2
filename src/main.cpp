@@ -176,6 +176,11 @@ void driverControl(){
 
 void setup(){ // Setup Code -- Only Runs Once
   // Screen Setup
+  Inertial.calibrate();
+  while( Inertial.isCalibrating()){
+    wait(100, msec);
+  }
+  
   Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(1, 1);
   Controller1.Screen.print("Hayden");
@@ -185,6 +190,7 @@ void setup(){ // Setup Code -- Only Runs Once
   Brain.Screen.setFillColor(vex::color(0,0,0));
   Brain.Screen.setCursor(12, 1);
   Brain.Screen.print("Programming by Hayden <3 <o/");
+  
 }
 
 
