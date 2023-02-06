@@ -4,7 +4,7 @@
 using namespace vex;
 
 
-double kP = 0.013;
+double kP = 0.009;
 double kI = 0.001;
 double kD = 0.003;
 
@@ -101,16 +101,20 @@ float frominches(float inches){
 void newAutonomous(){
   
   task bill(drivePID);
+  for(int i=0; i<4; i++){
+
   
   resetDriveSensors = true;
   desiredValue = frominches(24);
   desiredTurnValue = 0;
   wait(2000, msec);
 
-  resetDriveSensors = true;
-  desiredValue = frominches(24);
+  //resetDriveSensors = true;
+  desiredTurnValue = 0;
+  desiredValue = frominches(0);
   wait(2000, msec);
-
+  }
+  /*
   resetDriveSensors = true;
   desiredValue = 0;
   desiredTurnValue = 90;
@@ -118,7 +122,7 @@ void newAutonomous(){
 
   resetDriveSensors = true;
   desiredTurnValue = 0;
-  desiredValue = frominches(-48);
-  wait(3000, msec);
-  
+  desiredValue = frominches((-48));
+  wait(2000, msec);
+  */
 }
