@@ -6,7 +6,7 @@ using namespace vex;
 
 double kP = 0.009;
 double kI = 0.001;
-double kD = 0.003;
+double kD = 0.006;
 
 double turnkP = 0.11;
 double turnkI = 0.00;
@@ -94,6 +94,54 @@ int drivePID(){
 
 float frominches(float inches){
   return inches/((4*3.141)/360);  // 687.67 = tile
+}
+
+void startIntake(){
+  ColorRoller.setVelocity(40,percent); // Set Velocity of Intake
+  Conveyor1.setVelocity(45,percent); // Set Velocity of Conveyor1
+  ColorRoller.spin(forward); // Start Motor
+  Conveyor1.spin(forward); // Start Motor
+}
+
+void stopIntake(){
+  ColorRoller.setVelocity(0, percent);
+  Conveyor1.setVelocity(0, percent);
+}
+
+void startColor(){
+  ColorRoller.setVelocity(-45,percent); // Set Velocity of Intake
+  ColorRoller.spin(forward); // Start Motor
+}
+
+void stopColor(){
+  ColorRoller.setVelocity(0, percent);
+}
+
+void startFlywheel(int powera){
+  Flywheel.setVelocity(powera, percent);
+  Flywheel.spin(forward);
+}
+
+void stopFlywheel(){
+  Flywheel.setVelocity(0, percent);
+}
+
+void startConveyorToFlywheel(){
+  Conveyor2.setVelocity(55, percent);
+  Conveyor2.spin(forward);
+}
+
+void startConveyorToFlywheelIntermittent(){
+  Conveyor2.setVelocity(75, percent);
+  Conveyor2.spin(forward);
+  wait(.5, sec);
+  Conveyor2.setVelocity(20, percent);
+  wait(.5, sec);
+  Conveyor2.setVelocity(75, percent);
+}
+
+void stopConveyorToFlywheel(){
+  Conveyor2.setVelocity(0, percent);
 }
 
 

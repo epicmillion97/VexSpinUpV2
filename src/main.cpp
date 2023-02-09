@@ -118,6 +118,11 @@ void driverControl(){
   Controller1.Screen.setCursor(3, 1);
   Controller1.Screen.print(Inertial.rotation(deg));
 
+  if(Controller1.ButtonA.pressing() == true){
+    Pneumatics.set(false);
+  } else{
+    Pneumatics.set(true);
+  }
   if(Controller1.ButtonY.pressing() == true) { //This is for Conveyor1 and Intake
     ColorRoller.setVelocity(currentcolorRollerSpeed,percent); // Set Velocity of Intake
     Conveyor1.setVelocity(currentConveyor1Speed,percent); // Set Velocity of Conveyor1
