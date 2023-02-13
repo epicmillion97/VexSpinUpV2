@@ -14,6 +14,7 @@ extern motor Conveyor2;
 extern controller Controller1;
 extern inertial Inertial;
 extern digital_out Pneumatics;
+extern controller Controller2;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

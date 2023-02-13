@@ -19,6 +19,7 @@ motor Conveyor2 = motor(PORT8, ratio18_1, false);
 controller Controller1 = controller(primary);
 inertial Inertial = inertial(PORT10);
 digital_out Pneumatics = digital_out(Brain.ThreeWirePort.A);
+controller Controller2 = controller(partner);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable

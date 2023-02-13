@@ -28,8 +28,8 @@ int turnTotalError; // error + totalError
 
 bool resetDriveSensors = false;
 
-
 bool enablePIDdrive = true;
+
 
 int drivePID(){
   float startTime;
@@ -96,42 +96,42 @@ float frominches(float inches){
   return inches/((4*3.141)/360);  // 687.67 = tile
 }
 
-void startIntake(){
+void startIntake2(){
   ColorRoller.setVelocity(40,percent); // Set Velocity of Intake
   Conveyor1.setVelocity(45,percent); // Set Velocity of Conveyor1
   ColorRoller.spin(forward); // Start Motor
   Conveyor1.spin(forward); // Start Motor
 }
 
-void stopIntake(){
+void stopIntake2(){
   ColorRoller.setVelocity(0, percent);
   Conveyor1.setVelocity(0, percent);
 }
 
-void startColor(){
+void startColor2(){
   ColorRoller.setVelocity(-45,percent); // Set Velocity of Intake
   ColorRoller.spin(forward); // Start Motor
 }
 
-void stopColor(){
+void stopColor2(){
   ColorRoller.setVelocity(0, percent);
 }
 
-void startFlywheel(int powera){
+void startFlywheel2(int powera){
   Flywheel.setVelocity(powera, percent);
   Flywheel.spin(forward);
 }
 
-void stopFlywheel(){
+void stopFlywheel2(){
   Flywheel.setVelocity(0, percent);
 }
 
-void startConveyorToFlywheel(){
+void startConveyorToFlywheel2(){
   Conveyor2.setVelocity(55, percent);
   Conveyor2.spin(forward);
 }
 
-void startConveyorToFlywheelIntermittent(){
+void startConveyorToFlywheelIntermittent2(){
   Conveyor2.setVelocity(75, percent);
   Conveyor2.spin(forward);
   wait(.5, sec);
@@ -140,37 +140,92 @@ void startConveyorToFlywheelIntermittent(){
   Conveyor2.setVelocity(75, percent);
 }
 
-void stopConveyorToFlywheel(){
+void stopConveyorToFlywheel2(){
   Conveyor2.setVelocity(0, percent);
 }
 
 
 
+void donothing(){
+  enablePIDdrive = false;
+}
+
 void newAutonomous(){
-  
+  enablePIDdrive = true;
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("NEW A-3");
   task bill(drivePID);
-  for(int i=0; i<4; i++){
 
-  
   resetDriveSensors = true;
-  desiredValue = frominches(24);
+  desiredValue = frominches(10);
   desiredTurnValue = 0;
-  wait(2000, msec);
+  wait(1000, msec);
 
-  //resetDriveSensors = true;
-  desiredTurnValue = 0;
+  resetDriveSensors = true;
   desiredValue = frominches(0);
-  wait(2000, msec);
-  }
-  /*
-  resetDriveSensors = true;
-  desiredValue = 0;
   desiredTurnValue = 90;
-  wait(2000, msec);
+  wait(1000, msec);
 
   resetDriveSensors = true;
+  desiredValue = frominches(20);
   desiredTurnValue = 0;
-  desiredValue = frominches((-48));
+  wait(1500, msec);
+
+  resetDriveSensors = true;
+  desiredValue = frominches(0);
+  desiredTurnValue = 90;
+  wait(1000, msec);
+
+//
+
+  startColor2();
+  wait(.5, sec);
+  resetDriveSensors = true;
+  desiredValue = frominches(8);
+  desiredTurnValue = 0;
+  wait(1000, msec);
+
+  resetDriveSensors = true;
+  desiredValue = frominches(-6);
+  desiredTurnValue = 0;
+  wait(1000, msec);
+  stopColor2();
+
+//
+
+  startFlywheel2(85);
+  resetDriveSensors = true;
+  desiredValue = frominches(0);
+  desiredTurnValue = 145;
+  wait(1500, msec);
+
+  resetDriveSensors = true;
+  desiredValue = frominches(24*2.5);
+  desiredTurnValue = 0;
   wait(2000, msec);
-  */
+
+
+//
+
+  resetDriveSensors = true;
+  desiredValue = frominches(0);
+  desiredTurnValue = 180;
+  wait(1500, msec);
+
+
+  startConveyorToFlywheel2();
+  wait(1.5, sec);
+  stopConveyorToFlywheel2();
+  wait(.7, sec);
+  startConveyorToFlywheel2();
+  wait(1.5, sec);
+  stopConveyorToFlywheel2();
+  wait(.7, sec);
+  startConveyorToFlywheel2();
+  wait(1.5, sec);
+  stopConveyorToFlywheel2();
+  // stop flywheel
+  stopFlywheel2();
+  enablePIDdrive = true;
 }

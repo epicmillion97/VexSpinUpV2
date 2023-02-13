@@ -22,7 +22,7 @@ int conveyor2Speed = 55;
 int conveyor2SpeedTurbo = 90;
 int currentConveyor2Speed = conveyor2Speed;
 
-int flywheelStrength = 100; // Flywheel Strength 
+int flywheelStrength = 70; // Flywheel Strength 
 
 bool turboModeActive = false; // Current Turbo Status
 bool visionDrivingActive = false; // BETA IMAGE DETECTION Status

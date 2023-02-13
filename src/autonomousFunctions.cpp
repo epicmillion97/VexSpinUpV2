@@ -251,45 +251,111 @@ void autonomousThree(){
   driveForward(20, translationSpeed);
   driveTurn(90, turningSpeed);
   // run into roller
-  /*
+  
   startColor();
   wait(.5, sec);
   drivegay();
-  wait(.75,sec);
+  wait(1.25,sec);
   drivegaystop();
   // get away from roller
-  */
+  
   stopColor();
-  driveBackward(6, translationSpeed);
+  driveBackward(4, translationSpeed);
   
 
-  startFlywheel(82);
-  driveTurn(155, turningSpeed);
+  startFlywheel(98);
+  driveTurn(145, turningSpeed);
+  // move into the center for a shot
+  //startIntake();
+  driveStrafe(-2);
+  driveForward(2.5*tile, translationSpeed);
+  //stopIntake();
+
+  // shooting discs
+  driveTurn(174, turningSpeed);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  wait(1.5, sec);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  wait(1.5, sec);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  // stop flywheel
+  stopFlywheel();
+  
+
+}
+
+void autonomousSkills(){
+Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - 3");
+  // if placed on the two tiles near the roller facing out to the field
+  
+  // get to roller
+  driveForward(4.5, translationSpeed); // forward 3 inches to get off wall
+  driveTurn(90, turningSpeed);
+  driveForward(20, translationSpeed);
+  driveTurn(90, turningSpeed);
+  // run into roller
+  
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(1.25,sec);
+  drivegaystop();
+  // get away from roller
+  
+  stopColor();
+  driveBackward(4, translationSpeed);
+  
+
+  startFlywheel(97);
+  driveTurn(145, turningSpeed);
   // move into the center for a shot
   //startIntake();
   driveForward(2.5*tile, translationSpeed);
   //stopIntake();
 
   // shooting discs
-  driveTurn(176, turningSpeed);
+  driveTurn(174, turningSpeed);
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
-  wait(.7, sec);
+  wait(1.5, sec);
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
-  wait(.7, sec);
+  wait(1.5, sec);
   startConveyorToFlywheel();
   wait(1.5, sec);
   stopConveyorToFlywheel();
   // stop flywheel
   stopFlywheel();
 
-}
+  //
+  driveForward(1.5*tile, translationSpeed);
+  driveTurn(-45, turningSpeed);
 
-void autonomousSkills(){
-  driveForward(tile, translationSpeed);
-  driveTurn2(90, turningSpeed);
-  driveForward(tile, translationSpeed);
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(3,sec);
+  drivegaystop();
+  // get away from roller
+  
+  stopColor();
+  driveBackward(8, translationSpeed);
+
+  driveTurn(-45, turningSpeed);
+  driveBackward(tile, translationSpeed);
+  Pneumatics.set(true);
+  driveBackward(2.5*tile, translationSpeed);
+
+
+
 }

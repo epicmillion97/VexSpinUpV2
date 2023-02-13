@@ -21,12 +21,13 @@
 // Controller1          controller                    
 // Inertial             inertial      10              
 // Pneumatics           digital_out   A               
+// Controller2          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 #include "variables.h"
-//#include "autonomousFunctions.h"
-#include "newAutonomous.h"
+#include "autonomousFunctions.h"
+//#include "newAutonomous.h"
 
 
 using namespace vex;
@@ -78,6 +79,10 @@ void turbocode(){ // BETA TURBO CODE CALLBACK FUNCTION
 
 
 void driverControl(){
+  FrontLeft.stop(brake);
+  BackLeft.stop(brake);
+  FrontRight.stop(brake);
+  BackRight.stop(brake);
   Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("DriveR");
@@ -119,9 +124,9 @@ void driverControl(){
   Controller1.Screen.print(Inertial.rotation(deg));
 
   if(Controller1.ButtonA.pressing() == true){
-    Pneumatics.set(false);
-  } else{
     Pneumatics.set(true);
+  } else{
+    Pneumatics.set(false);
   }
   if(Controller1.ButtonY.pressing() == true) { //This is for Conveyor1 and Intake
     ColorRoller.setVelocity(currentcolorRollerSpeed,percent); // Set Velocity of Intake
@@ -159,20 +164,20 @@ void driverControl(){
 
   if(Controller1.ButtonLeft.pressing() == true){ //Decreases flywheel strength
     if(flywheelStrength > 10){
-      flywheelStrength-=10;
+      flywheelStrength-=5;
       Controller1.Screen.clearLine(2);
       Controller1.Screen.setCursor(2, 1);
       Controller1.Screen.print(flywheelStrength);
     }
-    wait(400,msec);
+    wait(250,msec);
   } else if(Controller1.ButtonRight.pressing() == true){ //Increases flywheel strength
     if(flywheelStrength < 100){
-      flywheelStrength+=10;
+      flywheelStrength+=5;
       Controller1.Screen.clearLine(2);
       Controller1.Screen.setCursor(2, 1);
       Controller1.Screen.print(flywheelStrength);
     }
-    wait(400,msec);
+    wait(250,msec);
   }
   Controller1.ButtonR1.pressed(turbocode); // Activate Turbo Mode
 
@@ -205,8 +210,9 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   setup();
+  Competition.bStopTasksBetweenModes= true;
   Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
-  Competition.autonomous(newAutonomous);
+  Competition.autonomous(autonomousSkills);
   Competition.drivercontrol(driverControl);
   
 
