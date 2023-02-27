@@ -263,7 +263,7 @@ void autonomousThree(){
   driveBackward(4, translationSpeed);
   
 
-  startFlywheel(98);
+  startFlywheel(81);
   driveTurn(145, turningSpeed);
   // move into the center for a shot
   //startIntake();
@@ -290,6 +290,30 @@ void autonomousThree(){
 
 }
 
+void autonomousPhil(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - 3");
+  // if placed on the two tiles near the roller facing out to the field
+  
+  // get to roller
+  driveForward(4.5, translationSpeed); // forward 3 inches to get off wall
+  driveTurn(90, turningSpeed);
+  driveForward(20, translationSpeed);
+  driveTurn(90, turningSpeed);
+  // run into roller
+  
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(1.25,sec);
+  drivegaystop();
+  // get away from roller
+  
+  stopColor();
+  driveBackward(3, translationSpeed);
+}
+
 void autonomousSkills(){
 Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(2, 1);
@@ -314,7 +338,7 @@ Controller1.Screen.clearScreen();
   driveBackward(4, translationSpeed);
   
 
-  startFlywheel(97);
+  startFlywheel(84);
   driveTurn(145, turningSpeed);
   // move into the center for a shot
   //startIntake();
@@ -358,4 +382,10 @@ Controller1.Screen.clearScreen();
 
 
 
+}
+
+void autonomousNOTHING(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - Non");
 }

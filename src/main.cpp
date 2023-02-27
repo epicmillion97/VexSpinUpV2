@@ -114,14 +114,14 @@ void driverControl(){
   BackLeft.spin(forward);
   BackRight.spin(forward);
 
-  int frontLeftMotorPosition = FrontLeft.position(degrees);
-  int frontRightMotorPosition = FrontRight.position(degrees);
-  int backLeftMotorPosition = FrontLeft.position(degrees);
-  int backRightMotorPosition = FrontRight.position(degrees);
-  Controller1.Screen.setCursor(2, 1);
-  Controller1.Screen.print((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
-  Controller1.Screen.setCursor(3, 1);
-  Controller1.Screen.print(Inertial.rotation(deg));
+  //int frontLeftMotorPosition = FrontLeft.position(degrees);
+  //int frontRightMotorPosition = FrontRight.position(degrees);
+  //int backLeftMotorPosition = FrontLeft.position(degrees);
+  //int backRightMotorPosition = FrontRight.position(degrees);
+  //Controller1.Screen.setCursor(2, 1);
+  //Controller1.Screen.print((frontLeftMotorPosition+frontRightMotorPosition+backLeftMotorPosition+backRightMotorPosition)/4);
+  //Controller1.Screen.setCursor(3, 1);
+  //Controller1.Screen.print(Inertial.rotation(deg));
 
   if(Controller1.ButtonA.pressing() == true){
     Pneumatics.set(true);
@@ -202,7 +202,7 @@ void setup(){ // Setup Code -- Only Runs Once
   Brain.Screen.setFillColor(vex::color(0,0,0));
   Brain.Screen.setCursor(12, 1);
   Brain.Screen.print("Programming by Hayden <3 <o/");
-  
+
 }
 
 
@@ -212,7 +212,7 @@ int main() {
   setup();
   Competition.bStopTasksBetweenModes= true;
   Competition.bStopAllTasksBetweenModes = true; // maybe necessary?
-  Competition.autonomous(autonomousSkills);
+  Competition.autonomous(autonomousPhil);
   Competition.drivercontrol(driverControl);
   
 
@@ -223,6 +223,6 @@ int main() {
 
 // created by yaseen and hayden. the best
 
-// number 5 - autonomousOne
-// number 1 - autonomousTwo
-// number 2 - autonomousThree
+// number 5 - skills
+// number 1 - none
+// number 3 - two tile 

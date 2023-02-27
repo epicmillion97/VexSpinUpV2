@@ -17,4 +17,6 @@ void autonomousOne();
 void autonomousTwo();
 void autonomousThree();
 void autonomousSkills();
+void autonomousNOTHING();
+void autonomousPhil();
 #endif
