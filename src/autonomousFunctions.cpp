@@ -248,14 +248,14 @@ void autonomousThree(){
   // get to roller
   driveForward(4.5, translationSpeed); // forward 3 inches to get off wall
   driveTurn(90, turningSpeed);
-  driveForward(20, translationSpeed);
+  driveForward(21, translationSpeed);
   driveTurn(90, turningSpeed);
   // run into roller
   
   startColor();
   wait(.5, sec);
   drivegay();
-  wait(1.25,sec);
+  wait(.75,sec);
   drivegaystop();
   // get away from roller
   
@@ -306,13 +306,81 @@ void autonomousPhil(){
   startColor();
   wait(.5, sec);
   drivegay();
-  wait(1.25,sec);
+  wait(.75,sec);
   drivegaystop();
   // get away from roller
   
   stopColor();
   driveBackward(3, translationSpeed);
 }
+
+void autonomousYaseen(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - Y");
+  // if placed on the two tiles near the roller facing out to the field
+  
+  // get to roller
+  driveForward(4.5, translationSpeed); // forward 3 inches to get off wall
+  driveTurn(90, turningSpeed);
+  driveForward(21, translationSpeed);
+  driveTurn(90, turningSpeed);
+  // run into roller
+  
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(.75,sec);
+  drivegaystop();
+  // get away from roller
+  
+  stopColor();
+  driveBackward(5, translationSpeed);
+  
+
+  startFlywheel(80);
+  driveTurn(100, turningSpeed);
+  // move into the center for a shot
+  //startIntake();
+  driveStrafe(5);
+  driveForward(1.5 * tile, translationSpeed);
+  //stopIntake();
+  
+  // shooting discs
+  driveTurn(85, turningSpeed);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  wait(1.5, sec);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  wait(1.5, sec);
+  startConveyorToFlywheel();
+  wait(1.5, sec);
+  stopConveyorToFlywheel();
+  // stop flywheel
+  stopFlywheel();
+  
+
+}
+
+void autonomousNoah(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(2, 1);
+  Controller1.Screen.print("A-Act - N");
+  // if placed on the two tiles near the roller facing out to the field  
+  startColor();
+  wait(.5, sec);
+  drivegay();
+  wait(.75,sec);
+  drivegaystop();
+  // get away from roller
+  
+  stopColor();
+  driveBackward(4, translationSpeed);
+}
+
 
 void autonomousSkills(){
 Controller1.Screen.clearScreen();

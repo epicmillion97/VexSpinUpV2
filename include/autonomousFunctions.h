@@ -19,4 +19,6 @@ void autonomousThree();
 void autonomousSkills();
 void autonomousNOTHING();
 void autonomousPhil();
+void autonomousYaseen();
+void autonomousNoah();
 #endif
